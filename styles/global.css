@@ -1,32 +1,28 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    Fira Sans,
-    Droid Sans,
-    Helvetica Neue,
-    sans-serif;
+    height: 100%;
+    /* Ensure the body takes the full height of the viewport */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+#root,
+#__next {
+    /* For React or Next.js apps */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* Ensure root container takes full height */
 }
 
-* {
-  box-sizing: border-box;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
+.main-content {
+    flex: 1;
+    /* Make the main content grow to fill the available space */
 }
