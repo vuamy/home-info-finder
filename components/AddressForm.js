@@ -123,7 +123,7 @@ export default function AddressForm() {
                             />
                         </div>
                     </div>
-                    {isValid === false && error && (
+                    {isValid === false && error && hasSubmitted === true && (
                         <p className="text-sm text-error font-semibold mt-4">{error}</p>
                         )}
                     <button className="mt-6 self-end border bg-primary text-white border-solid px-2 py-2 text-sm font-semibold rounded-md w-1/3">

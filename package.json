@@ -7,9 +7,12 @@
     "build:tailwind": "tailwindcss-cli build styles/global.css -o styles/tailwind.css"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.8",
+    "@vis.gl/react-google-maps": "^1.5.0",
     "autoprefixer": "^10.4.20",
     "dotenv": "^16.4.7",
-    "next": "latest",
+    "next": "^15.1.6",
+    "openai": "^4.80.1",
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "^7.1.3"

@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import Footer from "../components/Footer.js";
+import GptResponse from "../components/GptResponse.js";
+import MapResponse from "../components/MapResponse.js";
 
 export default function HomeInfo() {
     // Save home information in variables
     const [fullName, setFullName] = useState("")
+    const [location, setLocation] = useState([])
     const [imageUrl, setImageUrl] = useState(null)
 
     // Query place ID
@@ -16,9 +19,9 @@ export default function HomeInfo() {
         try {
             const response = await fetch(`https://places.googleapis.com/v1/places/${address}?fields=formattedAddress,location&key=${process.env.GOOGLE_API_KEY}`);
             const data = await response.json();
-            console.log(data)
             setFullName(data.formattedAddress)
             if (data.location) {
+                setLocation([data.location.latitude, data.location.longitude])
                 fetchPlaceImage(data.location.latitude, data.location.longitude);
             }
 
@@ -58,13 +61,23 @@ export default function HomeInfo() {
 
     return (
         <div className="flex flex-col min-h-screen">
-            <main className="main-content flex flex-col flex-grow bg-muted flex p-10">
+            <main className="main-content flex flex-col flex-grow bg-muted flex p-10 items-center">
                 <div className="">
                     <p>You entered the address:</p>
-                    <h2 className="text-lg font-semibold">{fullName}</h2>
+                    <h2 className="text-3xl font-semibold">{fullName}</h2>
                 </div>
-                <div className="mt-6 flex">
-                    <img src={imageUrl} alt="Place Photo" />
+                <div className="mt-10 flex justify-center items-center">
+                    <img 
+                        src={imageUrl} 
+                        alt="Place Photo" 
+                        className="border border-primary rounded-lg"
+                    />
+                    <div className="w-full ml-10">
+                        <GptResponse address={fullName}/>
+                    </div>
+                </div>
+                <div className="mt-10 flex h-96 w-3/4">
+                    <MapResponse location={location} address={fullName}/>
                 </div>
             </main>
             <Footer/>
