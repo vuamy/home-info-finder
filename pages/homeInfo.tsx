@@ -60,12 +60,14 @@ export default function HomeInfo() {
     }, [address]);
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen bg-muted">
+            <a 
+                className="ml-6 mt-6 cursor-pointer"
+                href="/">
+                Return to Address Search
+            </a>
             <main className="main-content flex flex-col flex-grow bg-muted flex p-10 items-center">
-                <div className="">
-                    <p>You entered the address:</p>
-                    <h2 className="text-3xl font-semibold">{fullName}</h2>
-                </div>
+                <h2 className="text-3xl font-semibold">{fullName}</h2>
                 <div className="mt-10 flex justify-center items-center">
                     <img 
                         src={imageUrl} 
