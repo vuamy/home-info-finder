@@ -52,22 +52,30 @@ export default function AddressForm() {
 
             setHasSubmitted(true);
             const data = await response.json();
-
+            
+            // Valid complete address
             if (data.result?.verdict?.addressComplete) {
-                setIsValid(true);
-                setError("");
-                router.push({
-                    pathname: '/homeInfo',
-                    query: { address: data.result.geocode.placeId },
-                });
+                
+                // Valid residential address
+                if (data.result.metadata.residential) {
+                    setIsValid(true);
+                    setError("");
+                    router.push({
+                        pathname: '/homeInfo',
+                        query: { address: data.result.geocode.placeId },
+                    });
+                } else {
+                    setIsValid(false);
+                    setError("Address is not a residential home address.");
+                }
             } else {
-                setIsValid(false);
-                setError("Invalid address.");
+                    setIsValid(false);
+                    setError("Invalid address.");
             }
-            } catch (error) {
-                setIsValid(false);
-                setError("Failed to validate address. Please try again.");
-                console.error(error);
+        } catch (error) {
+            setIsValid(false);
+            setError("Failed to validate address. Please try again.");
+            console.error(error);
         }
     };
 
